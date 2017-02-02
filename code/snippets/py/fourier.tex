@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,numbersep=0.5em,firstnumber=9]
+\PY{k}{def} \PY{n+nf}{fourier}\PY{p}{(}\PY{n}{freq}\PY{p}{,} \PY{n}{components}\PY{p}{,} \PY{n}{tlims}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+  \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s+sd}{  freq is a number}
+\PY{l+s+sd}{  components is a list of numbers}
+\PY{l+s+sd}{  \PYZdq{}\PYZdq{}\PYZdq{}}
+  \PY{n}{t} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{*}\PY{n}{tlims}\PY{p}{,} \PY{n}{num}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+  \PY{n}{y} \PY{o}{=} \PY{l+m+mi}{0}\PY{o}{*}\PY{n}{t}
+  \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{components}\PY{p}{:}
+    \PY{n}{y} \PY{o}{+}\PY{o}{=} \PY{l+m+mf}{1.0}\PY{o}{/}\PY{n}{n} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{p}{(}\PY{n}{freq}\PY{o}{*}\PY{n}{n}\PY{p}{)}\PY{o}{*}\PY{n}{t}\PY{p}{)}
+  \PY{k}{return} \PY{n}{t}\PY{p}{,} \PY{n}{y}
+\end{Verbatim}

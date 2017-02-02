@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,numbersep=0.5em,firstnumber=7]
+\PY{n}{string1} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{hello \PYZob{}firstname\PYZcb{} \PYZob{}lastname\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+  \PY{n}{firstname}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Ebrahim}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+  \PY{n}{lastname}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Amiri}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+  \PY{p}{)}
+\PY{n}{string2} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{hello \PYZob{}\PYZob{}\PYZob{}firstname\PYZcb{}\PYZcb{}\PYZcb{} \PYZob{}\PYZob{}\PYZob{}lastname\PYZcb{}\PYZcb{}\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+  \PY{n}{firstname}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Ittiphong}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+  \PY{n}{lastname}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Leevongwat}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+  \PY{p}{)}
+\PY{n}{names} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{string1}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{amiri}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{string2}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{leev}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{]}
+\PY{k}{for} \PY{n}{s}\PY{p}{,}\PY{n}{n} \PY{o+ow}{in} \PY{n}{names}\PY{p}{:}
+  \PY{n}{outname} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{../tex/pieces/\PYZob{}\PYZcb{}.tex}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+  \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{outname}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{w}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{fout}\PY{p}{:}
+    \PY{n}{fout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+\end{Verbatim}

@@ -1,0 +1,69 @@
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,numbersep=0.5em]
+ 
+\PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k+kn}{import} \PY{n}{print\PYZus{}function}
+
+\PY{k+kn}{import} \PY{n+nn}{os}
+
+\PY{c}{\PYZsh{}\PYZdl{} string\PYZus{}formatting}
+\PY{n}{string1} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{hello \PYZob{}firstname\PYZcb{} \PYZob{}lastname\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+  \PY{n}{firstname}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Ebrahim}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+  \PY{n}{lastname}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Amiri}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+  \PY{p}{)}
+\PY{n}{string2} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{hello \PYZob{}\PYZob{}\PYZob{}firstname\PYZcb{}\PYZcb{}\PYZcb{} \PYZob{}\PYZob{}\PYZob{}lastname\PYZcb{}\PYZcb{}\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+  \PY{n}{firstname}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Ittiphong}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+  \PY{n}{lastname}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Leevongwat}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+  \PY{p}{)}
+\PY{n}{names} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{string1}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{amiri}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{string2}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{leev}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{]}
+\PY{k}{for} \PY{n}{s}\PY{p}{,}\PY{n}{n} \PY{o+ow}{in} \PY{n}{names}\PY{p}{:}
+  \PY{n}{outname} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{../tex/pieces/\PYZob{}\PYZcb{}.tex}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+  \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{outname}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{w}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{fout}\PY{p}{:}
+    \PY{n}{fout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+\PY{c}{\PYZsh{}\PYZdl{}}
+
+\PY{c}{\PYZsh{}\PYZdl{} template}
+\PY{n}{header} \PY{o}{=} \PY{l+s}{r\PYZdq{}\PYZdq{}\PYZdq{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{begin\PYZob{}multicols\PYZcb{}\PYZob{}[=[cols]=]\PYZcb{}}\PY{l+s}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{n}{footer} \PY{o}{=} \PY{l+s}{r\PYZdq{}\PYZdq{}\PYZdq{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{end\PYZob{}multicols\PYZcb{}}\PY{l+s}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{n}{texstring} \PY{o}{=} \PY{l+s}{r\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s}{\PYZbs{}}\PY{l+s}{includegraphics[width=}\PY{l+s}{\PYZbs{}}\PY{l+s}{linewidth]\PYZob{}[=[name]=]\PYZcb{}}
+\PY{l+s}{\PYZdq{}\PYZdq{}\PYZdq{}}
+
+\PY{k}{def} \PY{n+nf}{template}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+  \PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}\PYZob{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+  \PY{n}{y} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZcb{}\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+  \PY{n}{y} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{[=[}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+  \PY{n}{y} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{]=]}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+  \PY{k}{return} \PY{n}{y}
+\PY{c}{\PYZsh{}\PYZdl{}}
+
+\PY{c}{\PYZsh{}\PYZdl{} grid}
+\PY{k}{def} \PY{n+nf}{grid}\PY{p}{(}\PY{n}{indir}\PY{p}{,} \PY{n}{outfile}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{N}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+  \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{outfile}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{w}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{fout}\PY{p}{:}
+    
+    \PY{c}{\PYZsh{} print the header}
+    \PY{n}{fout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{template}\PY{p}{(}\PY{n}{header}\PY{p}{)}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{cols}\PY{o}{=}\PY{n}{C}\PY{p}{)}\PY{p}{)}
+    
+    \PY{c}{\PYZsh{} print something for each file}
+    \PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{indir}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{N}\PY{p}{]}\PY{p}{:}
+      \PY{n}{fout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{template}\PY{p}{(}\PY{n}{texstring}\PY{p}{)}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+        \PY{n}{name}\PY{o}{=}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{indir}\PY{p}{,}\PY{n}{f}\PY{p}{)}\PY{p}{,}
+        \PY{p}{)}\PY{p}{)}
+      
+    \PY{c}{\PYZsh{} print the footer}
+    \PY{n}{fout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{template}\PY{p}{(}\PY{n}{footer}\PY{p}{)}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\PY{c}{\PYZsh{}\PYZdl{}}
+
+\PY{c}{\PYZsh{}\PYZdl{} using\PYZus{}grid}
+\PY{k}{if} \PY{n}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s}{\PYZdq{}}\PY{p}{:}
+  \PY{n}{grid}\PY{p}{(}
+    \PY{n}{indir}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{../img/fouriers}\PY{l+s}{\PYZdq{}}\PY{p}{,} 
+    \PY{n}{outfile}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{../tex/pieces/grid.tex}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+    \PY{n}{C}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{c}{\PYZsh{} five columns, all images}
+    \PY{p}{)}
+  \PY{n}{grid}\PY{p}{(}
+    \PY{n}{indir}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{../img/fouriers}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+    \PY{n}{outfile}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{../tex/pieces/closeup.tex}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+    \PY{n}{N}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{c}{\PYZsh{} four images total}
+    \PY{n}{C}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{c}{\PYZsh{} across two columns}
+    \PY{p}{)}
+\PY{c}{\PYZsh{}\PYZdl{}}
+\end{Verbatim}

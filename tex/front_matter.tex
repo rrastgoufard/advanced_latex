@@ -1,0 +1,91 @@
+ 
+\synctex=1 
+
+% These are general packages.  
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{verbatim}
+\usepackage{fancyvrb}
+\usepackage{multicol}
+\usepackage{grffile}
+\usepackage{array}
+
+% Customizing the theme!!
+% \usetheme{Warsaw}
+\usefonttheme[onlymath]{serif}
+\useoutertheme{infolines}
+\useoutertheme[footline=empty]{miniframes}
+\useinnertheme{circles}
+
+% Custom color scheme.  Going for dark following
+% http://tex.stackexchange.com/questions/174924/
+%   how-to-customize-beamers-color
+% and
+% http://tex.stackexchange.com/questions/57477/
+%   beamer-dark-theme
+\definecolor{myblue}{RGB}{33,84,157}
+% \definecolor{myblue}{RGB}{33,157,55}
+
+\setbeamercolor{normal text}{fg=white,bg=black!90}
+\setbeamercolor*{structure}{bg=myblue!20,fg=myblue}
+
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=structure.fg}
+\setbeamercolor*{palette secondary}{use=structure,fg=white,bg=structure.fg!75}
+\setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=black}
+\setbeamercolor*{palette quaternary}{fg=white,bg=black}
+
+\setbeamercolor{section in toc}{fg=white,bg=white}
+\setbeamercolor{alerted text}{use=structure,fg=structure.fg!50!black!80!black}
+
+\setbeamercolor{titlelike}{parent=palette primary,fg=structure.fg!50!black}
+\setbeamercolor{frametitle}{bg=myblue!75,fg=white}
+
+\setbeamercolor*{titlelike}{parent=palette primary}
+\setbeamertemplate{section in toc shaded}[default][70]
+
+% disable the beamer references icon.
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{frametitle}
+{
+  \nointerlineskip
+  \begin{beamercolorbox}[%
+    ht=1.0em,wd=\paperwidth]{frametitle}
+    \centering
+    \raisebox{.3em}{\strut \insertframetitle \strut}
+  \end{beamercolorbox}
+}
+
+\newenvironment{sblock}[2]{%
+\begin{minipage}{#2}%
+\begin{block}{\centering #1} \centering}
+{\end{block}%
+\end{minipage}}
+
+%$ beamer_snippets
+% Define the snippet command
+\newcommand{\snippet}[1]{\begin{small}%
+\input{../code/snippets/#1}\end{small}}
+
+% Redefine the snippet command to work better 
+% with beamer slides.
+\let\oldsnippet\snippet
+\renewcommand{\snippet}[1]{%
+\begin{center}%
+\begin{minipage}{.8\linewidth}%
+\oldsnippet{#1}%
+\end{minipage}%
+\end{center}%
+}
+%$
+
+\input{color_info.tex}
+
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}

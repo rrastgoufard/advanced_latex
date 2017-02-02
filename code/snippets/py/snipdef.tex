@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,numbersep=0.5em,firstnumber=97]
+\PY{k}{def} \PY{n+nf}{snipdef}\PY{p}{(}\PY{n}{pat}\PY{p}{,} \PY{n}{line}\PY{p}{)}\PY{p}{:}
+  \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Look for snippet definitions on a line.\PYZdq{}\PYZdq{}\PYZdq{}}
+  \PY{k}{if} \PY{n}{pat} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{line}\PY{p}{:}
+    \PY{k}{return} \PY{n+nb+bp}{None}
+  \PY{n}{idx} \PY{o}{=} \PY{n}{line}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{pat}\PY{p}{)}
+  \PY{c}{\PYZsh{} If the line starts with pat, then}
+  \PY{c}{\PYZsh{} consider it to be a snippet.}
+  \PY{k}{if} \PY{n}{idx} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+    \PY{c}{\PYZsh{} The snippet\PYZsq{}s name is everything}
+    \PY{c}{\PYZsh{} to the right of pat on this line.}
+    \PY{k}{return} \PY{n}{line}\PY{p}{[}\PY{n}{idx}\PY{o}{+}\PY{n+nb}{len}\PY{p}{(}\PY{n}{pat}\PY{p}{)}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+  \PY{k}{return} \PY{n+nb+bp}{None} \PY{c}{\PYZsh{} pattern is in line but not snippet}
+\end{Verbatim}

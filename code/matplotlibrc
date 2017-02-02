@@ -1,0 +1,27 @@
+# rc definitions for dark backgrounds
+
+lines.color: gray
+patch.edgecolor: gray
+
+text.color: gray
+
+font.family: serif
+font.serif: Computer Modern Roman
+font.sans-serif: Computer Modern Sans serif
+font.monospace: Computer Modern Typewriter
+text.usetex: true
+
+axes.facecolor: None
+axes.edgecolor: gray
+axes.labelcolor: gray
+
+xtick.color: gray
+ytick.color: gray
+
+grid.color: gray
+
+figure.facecolor: None
+figure.edgecolor: None
+
+savefig.facecolor: None
+savefig.edgecolor: None

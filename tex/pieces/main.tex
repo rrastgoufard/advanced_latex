@@ -1,0 +1,83 @@
+
+\begin{frame}
+\centering
+This presentation has approximately five
+lines of math in it.
+\\
+This presentation has approximately 300
+lines of code in it.
+\\[2em]
+All of the automation is written in python. \\
+Consider your tools and their limitations.
+\\[2em]
+There are three examples in ascending order
+of difficulty.  
+\end{frame}
+
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\input{pieces/matrix.tex}
+\input{pieces/fourier.tex}
+\input{pieces/snippets.tex}
+
+\section*{Discussion}
+\begin{frame}
+\frametitle{Nothing Left? :D}
+\tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+\frametitle{Parsing Logs}
+\begin{minipage}{.4\linewidth}
+Parsing through source code to find keywords
+is similar to parsing through log files to
+find keywords.
+\\[1em]
+Parse logs to generate tabular data in order
+to avoid needing to make layout decisions in
+advance.
+\\[1em]
+Having the power to change your mind 
+is {\bf valuable}.
+\end{minipage}
+\hfill
+\begin{minipage}{.55\linewidth}
+\includegraphics[width=\linewidth]{%
+../img/Table_Only_2015_09_23_learning.pdf}
+\end{minipage}
+\end{frame}
+
+\begin{frame}
+\frametitle{Discussion}
+How often do EE students/professors need
+to include source code?
+What about the {\bf listings} package?
+\\[1em]
+How severe is the penalty of making a mistake
+or having inconsistent documents due to
+copying and pasting code/figures/tables?
+\\[1em]
+Reproducible Research!
+\\[1em]
+Uses of Latex outside of papers/presentations?
+\\[1em]
+Bonus!  Check out those partially-highlighted outlines.
+\snippet{tex/currentsection}
+\end{frame}
+
+\begin{frame}
+\frametitle{Directory Listing of this Presentation}
+% tree --charset=ascii ../tex ../code ../img > pieces/tree.txt
+\vspace{-1em}
+\hfill 
+\begin{minipage}{.9\linewidth}
+\begin{multicols}{3}
+\begin{Tiny}
+\verbatiminput{pieces/tree.txt}
+\end{Tiny}
+\end{multicols}
+\end{minipage}
+\hfill
+\end{frame}

@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,numbersep=0.5em,firstnumber=120]
+  \PY{n}{name}\PY{p}{,} \PY{n}{ext} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{splitext}\PY{p}{(}\PY{n}{fname}\PY{p}{)}
+  \PY{n}{snippets} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}} \PY{c}{\PYZsh{} dict of this file\PYZsq{}s snippets}
+  \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{fname}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{r}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{fin}\PY{p}{:}
+    \PY{n}{sname} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}} \PY{c}{\PYZsh{} sname will be the name of snippet}
+    \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{line} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{fin}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+      \PY{k}{if} \PY{n}{snipdef}\PY{p}{(}\PY{n}{pat}\PY{p}{,} \PY{n}{line}\PY{p}{)} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{:}
+        \PY{n}{sname} \PY{o}{=} \PY{n}{snipdef}\PY{p}{(}\PY{n}{pat}\PY{p}{,} \PY{n}{line}\PY{p}{)}     
+        \PY{k}{if} \PY{n}{sname}\PY{p}{:} \PY{c}{\PYZsh{} beginning of a snippet}
+          \PY{k}{if} \PY{o+ow}{not} \PY{n}{sname} \PY{o+ow}{in} \PY{n}{snippets}\PY{p}{:}
+            \PY{c}{\PYZsh{} +1 because the code starts}
+            \PY{c}{\PYZsh{} on the line after the label.}
+            \PY{c}{\PYZsh{} Another +1 because enumerate}
+            \PY{c}{\PYZsh{} starts with i at 0.}
+            \PY{n}{snippets}\PY{p}{[}\PY{n}{sname}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{,} \PY{p}{[}\PY{p}{]}\PY{p}{)}
+      \PY{k}{if} \PY{n}{sname} \PY{o+ow}{and} \PY{n}{snipdef}\PY{p}{(}\PY{n}{pat}\PY{p}{,} \PY{n}{line}\PY{p}{)} \PY{o+ow}{is} \PY{n+nb+bp}{None}\PY{p}{:}
+        \PY{n}{snippets}\PY{p}{[}\PY{n}{sname}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{line}\PY{p}{)}
+\end{Verbatim}

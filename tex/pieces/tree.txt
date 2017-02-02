@@ -1,0 +1,113 @@
+../tex
+|-- 2015_10_17_advanced_latex.aux
+|-- 2015_10_17_advanced_latex.log
+|-- 2015_10_17_advanced_latex.nav
+|-- 2015_10_17_advanced_latex.out
+|-- 2015_10_17_advanced_latex.pdf
+|-- 2015_10_17_advanced_latex.snm
+|-- 2015_10_17_advanced_latex.synctex.gz
+|-- 2015_10_17_advanced_latex.tex
+|-- 2015_10_17_advanced_latex.toc
+|-- 2015_10_17_advanced_latex.vrb
+|-- color_info.tex
+|-- front_matter.tex
+`-- pieces
+    |-- amiri.tex
+    |-- A.tex
+    |-- b.tex
+    |-- closeup.tex
+    |-- code.tex
+    |-- fourier.tex
+    |-- grid.tex
+    |-- leev.tex
+    |-- main.tex
+    |-- matrix.tex
+    |-- snippets.tex
+    |-- tree.txt
+    |-- verbatim_table_colored.tex
+    |-- verbatim_table_excerpt.tex
+    `-- x.tex
+../code
+|-- colorized
+|   `-- py
+|       |-- fourier.tex
+|       |-- grid.tex
+|       |-- make_pygments.tex
+|       `-- matrix.tex
+|-- fourier.py
+|-- grid.py
+|-- grid.pyc
+|-- make_pygments.py
+|-- matplotlibrc
+|-- matrix.py
+`-- snippets
+    |-- py
+    |   |-- collect_lines.tex
+    |   |-- define_matches.tex
+    |   |-- fourier.tex
+    |   |-- grid.tex
+    |   |-- make_plots.tex
+    |   |-- pygmentize.tex
+    |   |-- simple_problem.tex
+    |   |-- snipdef.tex
+    |   |-- string_formatting.tex
+    |   |-- template.tex
+    |   |-- using_grid.tex
+    |   `-- write_snippets.tex
+    `-- tex
+        |-- beamer_snippets.tex
+        |-- currentsection.tex
+        |-- simple_problem.tex
+        |-- simple_table.tex
+        |-- snippet_example.tex
+        |-- template_results.tex
+        `-- using_snippets.tex
+../img
+|-- 2015_07_08_IttiphongLeevongwat.png
+|-- 2015_UNOEF_Schedule.png
+|-- EmirJoseMacari_2015_08_26.png
+|-- fouriers
+|   |-- 1_1.pdf
+|   |-- 1_2.pdf
+|   |-- 1_3.pdf
+|   |-- 1_4.pdf
+|   |-- 1_5.pdf
+|   |-- 2_1.pdf
+|   |-- 2_2.pdf
+|   |-- 2_3.pdf
+|   |-- 2_4.pdf
+|   |-- 2_5.pdf
+|   |-- 3_1.pdf
+|   |-- 3_2.pdf
+|   |-- 3_3.pdf
+|   |-- 3_4.pdf
+|   |-- 3_5.pdf
+|   |-- 4_1.pdf
+|   |-- 4_2.pdf
+|   |-- 4_3.pdf
+|   |-- 4_4.pdf
+|   |-- 4_5.pdf
+|   |-- 5_1.pdf
+|   |-- 5_2.pdf
+|   |-- 5_3.pdf
+|   |-- 5_4.pdf
+|   `-- 5_5.pdf
+|-- matrices
+|   |-- 0i.tex
+|   |-- 0.tex
+|   |-- 1i.tex
+|   |-- 1.tex
+|   |-- 2i.tex
+|   |-- 2.tex
+|   |-- 3i.tex
+|   |-- 3.tex
+|   |-- 4i.tex
+|   |-- 4.tex
+|   |-- summary0.tex
+|   |-- summary1.tex
+|   |-- summary2.tex
+|   |-- summary3.tex
+|   `-- summary4.tex
+`-- Table_Only_2015_09_23_learning.pdf
+
+8 directories, 100 files

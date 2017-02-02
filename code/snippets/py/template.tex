@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,numbersep=0.5em,firstnumber=23]
+\PY{n}{header} \PY{o}{=} \PY{l+s}{r\PYZdq{}\PYZdq{}\PYZdq{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{begin\PYZob{}multicols\PYZcb{}\PYZob{}[=[cols]=]\PYZcb{}}\PY{l+s}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{n}{footer} \PY{o}{=} \PY{l+s}{r\PYZdq{}\PYZdq{}\PYZdq{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{end\PYZob{}multicols\PYZcb{}}\PY{l+s}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{n}{texstring} \PY{o}{=} \PY{l+s}{r\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s}{\PYZbs{}}\PY{l+s}{includegraphics[width=}\PY{l+s}{\PYZbs{}}\PY{l+s}{linewidth]\PYZob{}[=[name]=]\PYZcb{}}
+\PY{l+s}{\PYZdq{}\PYZdq{}\PYZdq{}}
+
+\PY{k}{def} \PY{n+nf}{template}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+  \PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}\PYZob{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+  \PY{n}{y} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZcb{}\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+  \PY{n}{y} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{[=[}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+  \PY{n}{y} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{]=]}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+  \PY{k}{return} \PY{n}{y}
+\end{Verbatim}

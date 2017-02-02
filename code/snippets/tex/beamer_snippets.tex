@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,numbersep=0.5em,firstnumber=72]
+\PY{c}{\PYZpc{} Define the snippet command}
+\PY{k}{\PYZbs{}newcommand}\PY{n+nb}{\PYZob{}}\PY{k}{\PYZbs{}snippet}\PY{n+nb}{\PYZcb{}}[1]\PY{n+nb}{\PYZob{}}\PY{k}{\PYZbs{}begin}\PY{n+nb}{\PYZob{}}small\PY{n+nb}{\PYZcb{}}\PY{c}{\PYZpc{}}
+\PY{k}{\PYZbs{}input}\PY{n+nb}{\PYZob{}}../code/snippets/\PYZsh{}1\PY{n+nb}{\PYZcb{}}\PY{k}{\PYZbs{}end}\PY{n+nb}{\PYZob{}}small\PY{n+nb}{\PYZcb{}}\PY{n+nb}{\PYZcb{}}
+
+\PY{c}{\PYZpc{} Redefine the snippet command to work better }
+\PY{c}{\PYZpc{} with beamer slides.}
+\PY{k}{\PYZbs{}let}\PY{k}{\PYZbs{}oldsnippet}\PY{k}{\PYZbs{}snippet}
+\PY{k}{\PYZbs{}renewcommand}\PY{n+nb}{\PYZob{}}\PY{k}{\PYZbs{}snippet}\PY{n+nb}{\PYZcb{}}[1]\PY{n+nb}{\PYZob{}}\PY{c}{\PYZpc{}}
+\PY{k}{\PYZbs{}begin}\PY{n+nb}{\PYZob{}}center\PY{n+nb}{\PYZcb{}}\PY{c}{\PYZpc{}}
+\PY{k}{\PYZbs{}begin}\PY{n+nb}{\PYZob{}}minipage\PY{n+nb}{\PYZcb{}}\PY{n+nb}{\PYZob{}}.8\PY{k}{\PYZbs{}linewidth}\PY{n+nb}{\PYZcb{}}\PY{c}{\PYZpc{}}
+\PY{k}{\PYZbs{}oldsnippet}\PY{n+nb}{\PYZob{}}\PYZsh{}1\PY{n+nb}{\PYZcb{}}\PY{c}{\PYZpc{}}
+\PY{k}{\PYZbs{}end}\PY{n+nb}{\PYZob{}}minipage\PY{n+nb}{\PYZcb{}}\PY{c}{\PYZpc{}}
+\PY{k}{\PYZbs{}end}\PY{n+nb}{\PYZob{}}center\PY{n+nb}{\PYZcb{}}\PY{c}{\PYZpc{}}
+\PY{n+nb}{\PYZcb{}}
+\end{Verbatim}

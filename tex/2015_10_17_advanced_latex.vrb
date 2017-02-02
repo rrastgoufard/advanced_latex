@@ -1,0 +1,17 @@
+\frametitle{Define Patterns to Match}
+Each file is text.  Process each file
+sequentially line by line.
+\\[1em]
+Look for comments in the code that
+that have a snippet name preceded by a
+specific pattern.
+\begin{center}
+{\bf \%\$ snippet\_name}
+\end{center}
+Different languages use different comment
+delimiters, so define a pattern
+for each language of interest.
+\snippet{py/define_matches}
+(Python dictionary!
+The variable \verb|exts[".m"]|
+contains the text \verb|"%$"|.)

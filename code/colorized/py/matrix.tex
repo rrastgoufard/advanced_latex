@@ -1,0 +1,76 @@
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,numbersep=0.5em]
+\PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k+kn}{import} \PY{n}{print\PYZus{}function}
+
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{os}
+\PY{k+kn}{from} \PY{n+nn}{grid} \PY{k+kn}{import} \PY{n}{template}
+
+\PY{n}{tex} \PY{o}{=} \PY{l+s}{r\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s}{\PYZbs{}}\PY{l+s}{begin\PYZob{}align\PYZcb{}}
+\PY{l+s}{A\PYZus{}[=[i]=] \PYZam{} = }
+\PY{l+s}{\PYZbs{}}\PY{l+s}{begin\PYZob{}pmatrix\PYZcb{}}
+\PY{l+s}{\PYZbs{}}\PY{l+s}{input\PYZob{}../img/matrices/[=[i]=].tex\PYZcb{}}
+\PY{l+s}{\PYZbs{}}\PY{l+s}{end\PYZob{}pmatrix\PYZcb{} }\PY{l+s}{\PYZbs{}}\PY{l+s}{\PYZbs{}}
+\PY{l+s}{|A\PYZus{}[=[i]=]| \PYZam{} = [=[d]=] }\PY{l+s}{\PYZbs{}}\PY{l+s}{\PYZbs{}}
+\PY{l+s}{A\PYZus{}[=[i]=]\PYZca{}\PYZob{}\PYZhy{}1\PYZcb{} \PYZam{} = }
+\PY{l+s}{\PYZbs{}}\PY{l+s}{begin\PYZob{}pmatrix\PYZcb{}}
+\PY{l+s}{\PYZbs{}}\PY{l+s}{input\PYZob{}../img/matrices/[=[i]=]i.tex\PYZcb{}}
+\PY{l+s}{\PYZbs{}}\PY{l+s}{end\PYZob{}pmatrix\PYZcb{} }\PY{l+s}{\PYZbs{}}\PY{l+s}{\PYZbs{}}
+\PY{l+s}{|A\PYZus{}[=[i]=]\PYZca{}\PYZob{}\PYZhy{}1\PYZcb{}| \PYZam{} = [=[di]=]}
+\PY{l+s}{\PYZbs{}}\PY{l+s}{end\PYZob{}align\PYZcb{}}
+\PY{l+s}{\PYZdq{}\PYZdq{}\PYZdq{}}
+
+\PY{k}{def} \PY{n+nf}{doit}\PY{p}{(}\PY{n}{outdir}\PY{p}{)}\PY{p}{:}
+  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+    \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+    \PY{n}{np}\PY{o}{.}\PY{n}{savetxt}\PY{p}{(}
+      \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{outdir}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}\PYZcb{}.tex}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+      \PY{n}{A}\PY{p}{,}
+      \PY{n}{fmt}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}5.3f}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+      \PY{n}{delimiter}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{ \PYZam{} }\PY{l+s}{\PYZdq{}}\PY{p}{,}
+      \PY{n}{newline}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{ }\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+      \PY{p}{)}
+    \PY{n}{Ai} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+    \PY{n}{np}\PY{o}{.}\PY{n}{savetxt}\PY{p}{(}
+      \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{outdir}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}\PYZcb{}i.tex}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+      \PY{n}{Ai}\PY{p}{,}
+      \PY{n}{fmt}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}5.3f}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+      \PY{n}{delimiter}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{ \PYZam{} }\PY{l+s}{\PYZdq{}}\PY{p}{,}
+      \PY{n}{newline}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{ }\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+      \PY{p}{)}
+    \PY{n}{d} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{det}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+    \PY{n}{di} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{det}\PY{p}{(}\PY{n}{Ai}\PY{p}{)}
+    
+    \PY{n}{fname} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{summary\PYZob{}\PYZcb{}.tex}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+    \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{outdir}\PY{p}{,}\PY{n}{fname}\PY{p}{)}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{w}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{fout}\PY{p}{:}
+      \PY{n}{fout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{template}\PY{p}{(}\PY{n}{tex}\PY{p}{)}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+        \PY{n}{i}\PY{o}{=}\PY{n}{i}\PY{p}{,}
+        \PY{n}{d}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}:.3f\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{d}\PY{p}{)}\PY{p}{,}
+        \PY{n}{di}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}:.3f\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{di}\PY{p}{)}\PY{p}{,}
+        \PY{p}{)}\PY{p}{)}
+
+\PY{c}{\PYZsh{}\PYZdl{} simple\PYZus{}problem}
+\PY{k}{def} \PY{n+nf}{simple\PYZus{}problem}\PY{p}{(}\PY{n}{outdir}\PY{p}{)}\PY{p}{:}
+  \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{p}{[}
+    \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+    \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+    \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+    \PY{p}{]}\PY{p}{)}
+  \PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+  \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{solve}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{b}\PY{p}{)}
+  
+  \PY{n}{pairs} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{A}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{A}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{b}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{b}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{x}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{]}
+  \PY{k}{for} \PY{n}{v}\PY{p}{,} \PY{n}{name} \PY{o+ow}{in} \PY{n}{pairs}\PY{p}{:}
+    \PY{n}{np}\PY{o}{.}\PY{n}{savetxt}\PY{p}{(}
+      \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{outdir}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}\PYZcb{}.tex}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{name}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+      \PY{n}{v}\PY{p}{,}
+      \PY{n}{fmt}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}5.3f}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+      \PY{n}{delimiter}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{ \PYZam{} }\PY{l+s}{\PYZdq{}}\PY{p}{,}     \PY{c}{\PYZsh{} These two lines }
+      \PY{n}{newline}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{ }\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{,}   \PY{c}{\PYZsh{} enable latex inputs.}
+      \PY{p}{)}
+\PY{c}{\PYZsh{}\PYZdl{}    }
+
+\PY{k}{if} \PY{n}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s}{\PYZdq{}}\PY{p}{:}
+  \PY{n}{doit}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{../img/matrices}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+  \PY{n}{simple\PYZus{}problem}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{../tex/pieces}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}

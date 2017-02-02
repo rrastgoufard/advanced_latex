@@ -1,0 +1,63 @@
+\section{Matrix Inputs}
+\frame{\tableofcontents[currentsection]}
+
+\subsection{Matrices and Tables}
+\begin{frame}[fragile]
+\label{slide/matricesandtables}
+\frametitle{Matrices and Tables}
+Matrix syntax and table syntax are identical.
+Consider a file \verb|A.tex|.
+\begin{center}
+\begin{minipage}{.45\linewidth}
+\verbatiminput{pieces/A.tex}
+\end{minipage}
+\end{center}
+The contents of \verb|A.tex| can be 
+made into a table. \\[1em]
+\begin{minipage}{.45\linewidth}
+\centering
+%$ simple_table
+\begin{tabular}{c c c}
+$C_1$ & $C_2$ & $C_3$ \\
+\midrule
+\input{pieces/A.tex}
+\end{tabular}
+%$
+\end{minipage}
+\begin{minipage}{.45\linewidth}
+\snippet{tex/simple_table}
+\end{minipage}
+\end{frame}
+
+%$ simple_problem
+\subsection{Simple Problem}
+\begin{frame}
+\label{slide/linear_system}
+\frametitle{Simple Problem}
+Given a linear system $A$ and a resulting output
+$b$, find the input $x$ which maps to $b$
+through $A$.
+\begin{gather}
+A x = b \\
+x = A^{-1} b \\[2em]
+% Notice that A is now a matrix.
+\begin{pmatrix}\input{pieces/A.tex}\end{pmatrix}
+\begin{pmatrix}\input{pieces/x.tex}\end{pmatrix}
+= 
+\begin{pmatrix}\input{pieces/b.tex}\end{pmatrix}
+\end{gather}
+\end{frame}
+%$
+
+\subsection{Simple Problem Latex Code}
+\begin{frame}
+\frametitle{Latex Source for Linear System, 
+Slide \pageref{slide/linear_system}}
+\snippet{tex/simple_problem}
+\end{frame}
+
+\subsection{Simple Problem Python Code}
+\begin{frame}
+\snippet{py/simple_problem}
+\end{frame}
+

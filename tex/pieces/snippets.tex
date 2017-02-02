@@ -1,0 +1,111 @@
+\section{Code Snippets}
+\begin{frame}
+\tableofcontents[currentsection]
+\end{frame}
+
+%$ using_snippets
+\subsection{Defining Latex Commands}
+\begin{frame}
+\frametitle{Using Snippets}
+Sometimes, discussion revolves around code 
+snippets.  We would like to include these 
+snippets using a simple command.
+% We want a snippet here!
+\snippet{tex/using_snippets}
+% Did it work?!?
+This slide shows the latex source code to
+generate this slide.  (Recursive logic...?)
+\end{frame}
+%$
+
+\begin{frame}
+\frametitle{Snippet Command}
+\snippet{tex/beamer_snippets}
+\end{frame}
+
+\subsection{Pygments}
+\begin{frame}
+\frametitle{Pygmentize!}
+Pygments colors any source code with a variety
+of possible output formats.
+\begin{center}
+\begin{minipage}{.6\linewidth}
+\noindent
+{\bf pygmentize} -f latex -o output.tex input.tex \\
+\noindent
+{\bf pygmentize} -f html -o output.html input.tex
+\end{minipage}
+\end{center}
+The following is an example of calling the 
+command line function from within python.  
+Three optional arguments are specified.
+\snippet{py/pygmentize}
+\end{frame}
+
+% pygmentize -f tex -o verbatim_table_colored.tex verbatim_table_excerpt.tex 
+\begin{frame}[fragile]
+\frametitle{Typical Source Code with Snippet}
+\begin{minipage}{.35\linewidth}
+We want to pull out the snippet of code
+surrounded by ``{\bf \%\$}'', which we have 
+defined to be the start and stop markers of
+{\bf snippets}.
+\\[1em]
+The code on the right is an excerpt from Slide
+\pageref{slide/matricesandtables}, where we 
+showed how to input a matrix from a file into
+a table.
+\end{minipage}
+\hfill
+\begin{minipage}{.6\linewidth}
+\begin{small}
+\input{pieces/verbatim_table_colored.tex}
+\end{small}
+\end{minipage}
+\end{frame}
+
+\subsection{Python Solution}
+\begin{frame}[fragile]
+\frametitle{Define Patterns to Match}
+Each file is text.  Process each file 
+sequentially line by line.
+\\[1em]
+Look for comments in the code that
+that have a snippet name preceded by a 
+specific pattern.
+\begin{center}
+{\bf \%\$ snippet\_name}
+\end{center}
+Different languages use different comment
+delimiters, so define a pattern
+for each language of interest.
+\snippet{py/define_matches}
+(Python dictionary!  
+The variable \verb|exts[".m"]|
+contains the text \verb|"%$"|.)
+\end{frame}
+
+\begin{frame}
+\frametitle{Identifying Snippets}
+\snippet{py/snipdef}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collect Lines for Each Snippet}
+\snippet{py/collect_lines}
+\end{frame} 
+
+\begin{frame}
+\frametitle{Write Lines of Each Snippet}
+\snippet{py/write_snippets}
+\end{frame}
+
+%$ snippet_example
+% Here's this slide's source, an
+% example of using snippets!
+\begin{frame}
+\frametitle{Call Pygmentize and Use Snippets}
+\snippet{py/pygmentize}
+\snippet{tex/snippet_example}
+\end{frame}
+%$

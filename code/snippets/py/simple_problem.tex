@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,numbersep=0.5em,firstnumber=53]
+\PY{k}{def} \PY{n+nf}{simple\PYZus{}problem}\PY{p}{(}\PY{n}{outdir}\PY{p}{)}\PY{p}{:}
+  \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{p}{[}
+    \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+    \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+    \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+    \PY{p}{]}\PY{p}{)}
+  \PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+  \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{solve}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{b}\PY{p}{)}
+  
+  \PY{n}{pairs} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{A}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{A}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{b}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{b}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{x}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{]}
+  \PY{k}{for} \PY{n}{v}\PY{p}{,} \PY{n}{name} \PY{o+ow}{in} \PY{n}{pairs}\PY{p}{:}
+    \PY{n}{np}\PY{o}{.}\PY{n}{savetxt}\PY{p}{(}
+      \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{outdir}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}\PYZcb{}.tex}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{name}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+      \PY{n}{v}\PY{p}{,}
+      \PY{n}{fmt}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}5.3f}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+      \PY{n}{delimiter}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{ \PYZam{} }\PY{l+s}{\PYZdq{}}\PY{p}{,}     \PY{c}{\PYZsh{} These two lines }
+      \PY{n}{newline}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{ }\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{,}   \PY{c}{\PYZsh{} enable latex inputs.}
+      \PY{p}{)}
+\end{Verbatim}

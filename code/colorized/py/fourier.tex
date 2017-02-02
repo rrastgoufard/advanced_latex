@@ -1,0 +1,44 @@
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,numbersep=0.5em]
+ 
+\PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k+kn}{import} \PY{n}{print\PYZus{}function}
+
+\PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+\PY{k+kn}{from} \PY{n+nn}{itertools} \PY{k+kn}{import} \PY{n}{product}
+
+\PY{c}{\PYZsh{}\PYZdl{} fourier}
+\PY{k}{def} \PY{n+nf}{fourier}\PY{p}{(}\PY{n}{freq}\PY{p}{,} \PY{n}{components}\PY{p}{,} \PY{n}{tlims}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+  \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s+sd}{  freq is a number}
+\PY{l+s+sd}{  components is a list of numbers}
+\PY{l+s+sd}{  \PYZdq{}\PYZdq{}\PYZdq{}}
+  \PY{n}{t} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{*}\PY{n}{tlims}\PY{p}{,} \PY{n}{num}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+  \PY{n}{y} \PY{o}{=} \PY{l+m+mi}{0}\PY{o}{*}\PY{n}{t}
+  \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{components}\PY{p}{:}
+    \PY{n}{y} \PY{o}{+}\PY{o}{=} \PY{l+m+mf}{1.0}\PY{o}{/}\PY{n}{n} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{p}{(}\PY{n}{freq}\PY{o}{*}\PY{n}{n}\PY{p}{)}\PY{o}{*}\PY{n}{t}\PY{p}{)}
+  \PY{k}{return} \PY{n}{t}\PY{p}{,} \PY{n}{y}
+\PY{c}{\PYZsh{}\PYZdl{}}
+
+\PY{c}{\PYZsh{}\PYZdl{} make\PYZus{}plots}
+\PY{k}{def} \PY{n+nf}{make\PYZus{}plots}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+  \PY{n}{freqs} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}
+  \PY{n}{components} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{]}
+  \PY{k}{for} \PY{n}{freq}\PY{p}{,} \PY{n}{num} \PY{o+ow}{in} \PY{n}{product}\PY{p}{(}\PY{n}{freqs}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+    \PY{k}{print}\PY{p}{(}\PY{n}{freq}\PY{p}{,} \PY{n}{num}\PY{p}{)}
+    
+    \PY{n}{t}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{fourier}\PY{p}{(}\PY{n}{freq}\PY{p}{,} \PY{n}{components}\PY{p}{[}\PY{p}{:}\PY{n}{num}\PY{p}{]}\PY{p}{)}
+    
+    \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+    \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{p}{[}\PY{o}{.}\PY{l+m+mi}{3}\PY{p}{,}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mf}{2.5}\PY{p}{)}
+    \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}\PYZcb{} Hz, \PYZob{}\PYZcb{} Component\PYZob{}\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+      \PY{n}{freq}\PY{p}{,} \PY{n}{num}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}} \PY{k}{if} \PY{n}{num} \PY{o}{==} \PY{l+m+mi}{1} \PY{k}{else} \PY{l+s}{\PYZdq{}}\PY{l+s}{s}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+    \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+    \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{../img/fouriers/\PYZob{}\PYZcb{}\PYZus{}\PYZob{}\PYZcb{}.pdf}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+      \PY{n}{freq}\PY{p}{,} \PY{n}{num}\PY{p}{)}\PY{p}{)}
+    \PY{n}{plt}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+\PY{c}{\PYZsh{}\PYZdl{}}
+
+\PY{k}{if} \PY{n}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s}{\PYZdq{}}\PY{p}{:}
+  \PY{n}{make\PYZus{}plots}\PY{p}{(}\PY{p}{)}
+  
+\end{Verbatim}

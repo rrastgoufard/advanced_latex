@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,numbersep=0.5em,firstnumber=38]
+\PY{k}{def} \PY{n+nf}{grid}\PY{p}{(}\PY{n}{indir}\PY{p}{,} \PY{n}{outfile}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{N}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+  \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{outfile}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{w}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{fout}\PY{p}{:}
+    
+    \PY{c}{\PYZsh{} print the header}
+    \PY{n}{fout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{template}\PY{p}{(}\PY{n}{header}\PY{p}{)}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{cols}\PY{o}{=}\PY{n}{C}\PY{p}{)}\PY{p}{)}
+    
+    \PY{c}{\PYZsh{} print something for each file}
+    \PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{indir}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{N}\PY{p}{]}\PY{p}{:}
+      \PY{n}{fout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{template}\PY{p}{(}\PY{n}{texstring}\PY{p}{)}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+        \PY{n}{name}\PY{o}{=}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{indir}\PY{p}{,}\PY{n}{f}\PY{p}{)}\PY{p}{,}
+        \PY{p}{)}\PY{p}{)}
+      
+    \PY{c}{\PYZsh{} print the footer}
+    \PY{n}{fout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{template}\PY{p}{(}\PY{n}{footer}\PY{p}{)}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}

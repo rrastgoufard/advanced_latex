@@ -1,0 +1,194 @@
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,numbersep=0.5em]
+\PY{k+kn}{import} \PY{n+nn}{os}
+\PY{k+kn}{import} \PY{n+nn}{errno}
+\PY{k+kn}{from} \PY{n+nn}{subprocess} \PY{k+kn}{import} \PY{n}{call}
+
+\PY{c}{\PYZsh{}colorscheme = \PYZdq{}tango\PYZdq{}}
+\PY{n}{colorscheme} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{native}\PY{l+s}{\PYZdq{}}
+
+\PY{k}{def} \PY{n+nf}{main}\PY{p}{(}\PY{n}{indir}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{.}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{full}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{delete}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}\PY{p}{:}  
+\PY{c}{\PYZsh{}\PYZdl{} define\PYZus{}matches}
+  \PY{n}{exts} \PY{o}{=} \PY{p}{\PYZob{}}
+    \PY{l+s}{\PYZdq{}}\PY{l+s}{.m}\PY{l+s}{\PYZdq{}} \PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZdq{}}\PY{p}{,} 
+    \PY{l+s}{\PYZdq{}}\PY{l+s}{.py}\PY{l+s}{\PYZdq{}} \PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}\PYZdl{}}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+    \PY{l+s}{\PYZdq{}}\PY{l+s}{.tex}\PY{l+s}{\PYZdq{}} \PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+    \PY{p}{\PYZcb{}}
+\PY{c}{\PYZsh{}\PYZdl{}  }
+  \PY{n}{ignores} \PY{o}{=} \PY{p}{[}
+    \PY{c}{\PYZsh{}\PYZdq{}make\PYZus{}pygments.py\PYZdq{},}
+    \PY{c}{\PYZsh{}\PYZdq{}code.tex\PYZdq{},}
+    \PY{p}{]}
+
+  \PY{c}{\PYZsh{} a dictionary of all of the directories}
+  \PY{c}{\PYZsh{} we\PYZsq{}ll need to create.}
+  \PY{n}{dirs} \PY{o}{=} \PY{p}{\PYZob{}}
+    \PY{l+s}{\PYZdq{}}\PY{l+s}{listing}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{../tex/pieces/}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+    \PY{l+s}{\PYZdq{}}\PY{l+s}{colorinfo}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{../tex/}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+    \PY{l+s}{\PYZdq{}}\PY{l+s}{color}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{colorized/}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+    \PY{l+s}{\PYZdq{}}\PY{l+s}{snippets}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{snippets/}\PY{l+s}{\PYZdq{}}
+    \PY{p}{\PYZcb{}}
+  \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{dirs}\PY{p}{:}
+    
+    \PY{c}{\PYZsh{} Delete the folder of colored code}
+    \PY{c}{\PYZsh{} and the folder of snippets to start}
+    \PY{c}{\PYZsh{} fresh each time.}
+    \PY{k}{if} \PY{n}{delete}\PY{p}{:}
+      \PY{k}{if} \PY{n}{d} \PY{o+ow}{in} \PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{color}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{snippets}\PY{l+s}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+        \PY{n}{call}\PY{p}{(} \PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{rm}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZhy{}fr}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{dirs}\PY{p}{[}\PY{n}{d}\PY{p}{]}\PY{p}{]} \PY{p}{)}
+      
+    \PY{c}{\PYZsh{} Make sure all of the needed folders exist.}
+    \PY{n}{mkdir\PYZus{}p}\PY{p}{(}\PY{n}{dirs}\PY{p}{[}\PY{n}{d}\PY{p}{]}\PY{p}{)}
+
+  \PY{c}{\PYZsh{} always write the color information}
+  \PY{n}{make\PYZus{}color\PYZus{}info}\PY{p}{(}\PY{n}{dirs}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{colorinfo}\PY{l+s}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{colorscheme}\PY{p}{)}
+
+  \PY{c}{\PYZsh{} keep track of which files we colored}
+  \PY{n}{matched\PYZus{}files} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+    
+  \PY{c}{\PYZsh{} list all of the files in this directory}
+  \PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{indir}\PY{p}{)}\PY{p}{:}
+    \PY{n}{fullf} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{indir}\PY{p}{,}\PY{n}{f}\PY{p}{)}
+    \PY{k}{if} \PY{n}{f} \PY{o+ow}{in} \PY{n}{ignores}\PY{p}{:}
+      \PY{k}{continue}
+    \PY{n}{name}\PY{p}{,} \PY{n}{ext} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{splitext}\PY{p}{(} \PY{n}{f} \PY{p}{)}
+    
+    \PY{c}{\PYZsh{} if the file has one of the given }
+    \PY{c}{\PYZsh{} extensions, proceed to color it}
+    \PY{k}{if} \PY{n}{ext} \PY{o+ow}{in} \PY{n}{exts}\PY{p}{:}
+      \PY{n}{fnew} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}\PYZcb{}.tex}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{name}\PY{p}{,} \PY{n}{ext}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+      \PY{n}{fnewdir} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}
+        \PY{n}{dirs}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{color}\PY{l+s}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ext}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+      \PY{n}{fnew} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{fnewdir}\PY{p}{,} \PY{n}{fnew}\PY{p}{)}
+      \PY{k}{print} \PY{n}{f}
+      \PY{n}{make\PYZus{}snippets}\PY{p}{(}\PY{n}{fullf}\PY{p}{,} \PY{n}{dirs}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{snippets}\PY{l+s}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+                    \PY{n}{pat} \PY{o}{=} \PY{n}{exts}\PY{p}{[}\PY{n}{ext}\PY{p}{]}\PY{p}{)}
+      \PY{k}{if} \PY{n}{full}\PY{p}{:}
+        \PY{n}{matched\PYZus{}files}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{name}\PY{p}{,} \PY{n}{ext}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{n}{mkdir\PYZus{}p}\PY{p}{(}\PY{n}{fnewdir}\PY{p}{)}
+        \PY{n}{call}\PY{p}{(} \PY{p}{[}
+          \PY{l+s}{\PYZdq{}}\PY{l+s}{pygmentize}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+          \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZhy{}f}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{latex}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+          \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZhy{}P}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{verboptions=\PYZob{}\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+            \PY{l+s}{\PYZdq{}}\PY{l+s}{numbers=left,numbersep=0.5em}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{,}
+          \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZhy{}o}\PY{l+s}{\PYZdq{}}\PY{p}{,}  \PY{n}{fnew}\PY{p}{,} \PY{n}{fullf}
+        \PY{p}{]} \PY{p}{)}
+        
+  \PY{c}{\PYZsh{} write all of the colored code pieces}
+  \PY{c}{\PYZsh{} to a code\PYZus{}listing table of contents}
+  \PY{c}{\PYZsh{} in latex.}
+  \PY{n}{code\PYZus{}file} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}
+    \PY{n}{dirs}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{listing}\PY{l+s}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{code.tex}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+  \PY{n}{color\PYZus{}dir} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(} 
+    \PY{l+s}{\PYZdq{}}\PY{l+s}{../code/}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{dirs}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{color}\PY{l+s}{\PYZdq{}}\PY{p}{]} \PY{p}{)}
+  \PY{n}{mode} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{w}\PY{l+s}{\PYZdq{}} \PY{k}{if} \PY{n}{delete} \PY{k}{else} \PY{l+s}{\PYZdq{}}\PY{l+s}{a}\PY{l+s}{\PYZdq{}}
+  \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{code\PYZus{}file}\PY{p}{,} \PY{n}{mode}\PY{p}{)} \PY{k}{as} \PY{n}{fout}\PY{p}{:}
+    \PY{k}{for} \PY{n}{m}\PY{p}{,}\PY{n}{e} \PY{o+ow}{in} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{matched\PYZus{}files}\PY{p}{)}\PY{p}{:}
+      \PY{c}{\PYZsh{}joined = \PYZdq{}\PYZus{}\PYZdq{}.join([m, e])}
+      \PY{n}{joined} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{e}\PY{p}{,}\PY{n}{m}\PY{p}{)}
+      \PY{n}{sout} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s}{code\PYZob{}\PYZob{}\PYZob{}\PYZcb{}.\PYZob{}\PYZcb{}\PYZcb{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+        \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s}{\PYZus{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(} \PY{n}{m}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZus{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{e}\PY{p}{)}
+      \PY{n}{sout} \PY{o}{+}\PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s}{label\PYZob{}\PYZob{}code/\PYZob{}\PYZcb{}\PYZcb{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{joined}\PY{p}{)}
+      \PY{n}{sout} \PY{o}{+}\PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s}{begin\PYZob{}footnotesize\PYZcb{}}\PY{l+s}{\PYZdq{}}
+      \PY{n}{sout} \PY{o}{+}\PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s}{input\PYZob{}\PYZob{}\PYZob{}\PYZcb{}.tex\PYZcb{}\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+        \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{color\PYZus{}dir}\PY{p}{,} \PY{n}{joined}\PY{p}{)}\PY{p}{)}
+      \PY{n}{sout} \PY{o}{+}\PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s}{end\PYZob{}footnotesize\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}
+      \PY{n}{fout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{sout}\PY{p}{)}
+
+\PY{c}{\PYZsh{}\PYZdl{} snipdef}
+\PY{k}{def} \PY{n+nf}{snipdef}\PY{p}{(}\PY{n}{pat}\PY{p}{,} \PY{n}{line}\PY{p}{)}\PY{p}{:}
+  \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Look for snippet definitions on a line.\PYZdq{}\PYZdq{}\PYZdq{}}
+  \PY{k}{if} \PY{n}{pat} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{line}\PY{p}{:}
+    \PY{k}{return} \PY{n+nb+bp}{None}
+  \PY{n}{idx} \PY{o}{=} \PY{n}{line}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{pat}\PY{p}{)}
+  \PY{c}{\PYZsh{} If the line starts with pat, then}
+  \PY{c}{\PYZsh{} consider it to be a snippet.}
+  \PY{k}{if} \PY{n}{idx} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+    \PY{c}{\PYZsh{} The snippet\PYZsq{}s name is everything}
+    \PY{c}{\PYZsh{} to the right of pat on this line.}
+    \PY{k}{return} \PY{n}{line}\PY{p}{[}\PY{n}{idx}\PY{o}{+}\PY{n+nb}{len}\PY{p}{(}\PY{n}{pat}\PY{p}{)}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+  \PY{k}{return} \PY{n+nb+bp}{None} \PY{c}{\PYZsh{} pattern is in line but not snippet}
+\PY{c}{\PYZsh{}\PYZdl{}}
+      
+\PY{k}{def} \PY{n+nf}{make\PYZus{}snippets}\PY{p}{(}\PY{n}{fname}\PY{p}{,} \PY{n}{outdir}\PY{p}{,} \PY{n}{pat}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+  \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s+sd}{  Goes through the specified file and looks for}
+\PY{l+s+sd}{  matching pairs of pat.  It puts the code}
+\PY{l+s+sd}{  segment in between the tags into a }
+\PY{l+s+sd}{  small file and then colorizes just that}
+\PY{l+s+sd}{  code segment.}
+\PY{l+s+sd}{  \PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{c}{\PYZsh{}\PYZdl{} collect\PYZus{}lines}
+  \PY{n}{name}\PY{p}{,} \PY{n}{ext} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{splitext}\PY{p}{(}\PY{n}{fname}\PY{p}{)}
+  \PY{n}{snippets} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}} \PY{c}{\PYZsh{} dict of this file\PYZsq{}s snippets}
+  \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{fname}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{r}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{fin}\PY{p}{:}
+    \PY{n}{sname} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}} \PY{c}{\PYZsh{} sname will be the name of snippet}
+    \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{line} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{fin}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+      \PY{k}{if} \PY{n}{snipdef}\PY{p}{(}\PY{n}{pat}\PY{p}{,} \PY{n}{line}\PY{p}{)} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{:}
+        \PY{n}{sname} \PY{o}{=} \PY{n}{snipdef}\PY{p}{(}\PY{n}{pat}\PY{p}{,} \PY{n}{line}\PY{p}{)}     
+        \PY{k}{if} \PY{n}{sname}\PY{p}{:} \PY{c}{\PYZsh{} beginning of a snippet}
+          \PY{k}{if} \PY{o+ow}{not} \PY{n}{sname} \PY{o+ow}{in} \PY{n}{snippets}\PY{p}{:}
+            \PY{c}{\PYZsh{} +1 because the code starts}
+            \PY{c}{\PYZsh{} on the line after the label.}
+            \PY{c}{\PYZsh{} Another +1 because enumerate}
+            \PY{c}{\PYZsh{} starts with i at 0.}
+            \PY{n}{snippets}\PY{p}{[}\PY{n}{sname}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{,} \PY{p}{[}\PY{p}{]}\PY{p}{)}
+      \PY{k}{if} \PY{n}{sname} \PY{o+ow}{and} \PY{n}{snipdef}\PY{p}{(}\PY{n}{pat}\PY{p}{,} \PY{n}{line}\PY{p}{)} \PY{o+ow}{is} \PY{n+nb+bp}{None}\PY{p}{:}
+        \PY{n}{snippets}\PY{p}{[}\PY{n}{sname}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{line}\PY{p}{)}
+\PY{c}{\PYZsh{}\PYZdl{} write\PYZus{}snippets}
+  \PY{k}{for} \PY{n}{sname} \PY{o+ow}{in} \PY{n}{snippets}\PY{p}{:}
+    \PY{n}{i}\PY{p}{,} \PY{n}{lines} \PY{o}{=} \PY{n}{snippets}\PY{p}{[}\PY{n}{sname}\PY{p}{]}
+    \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{ }\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{sname}\PY{p}{,} \PY{n}{i}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{n+nb}{len}\PY{p}{(}\PY{n}{lines}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+    
+    \PY{n}{fname} \PY{o}{=} \PY{n}{sname} \PY{o}{+} \PY{n}{ext}
+    \PY{n}{inname} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{outdir}\PY{p}{,} \PY{n}{fname}\PY{p}{)}
+    
+    \PY{c}{\PYZsh{} put snippet in outdir subfolder }
+    \PY{c}{\PYZsh{} labeled by extension    }
+    \PY{n}{snipdir} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{outdir}\PY{p}{,}\PY{n}{ext}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+    \PY{n}{mkdir\PYZus{}p}\PY{p}{(}\PY{n}{snipdir}\PY{p}{)}
+    \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{inname}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{w}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{fout}\PY{p}{:}
+      \PY{n}{fout}\PY{o}{.}\PY{n}{writelines}\PY{p}{(}\PY{n}{lines}\PY{p}{)}
+\PY{c}{\PYZsh{}\PYZdl{} pygmentize      }
+    \PY{n}{call}\PY{p}{(}\PY{p}{[}
+      \PY{l+s}{\PYZdq{}}\PY{l+s}{pygmentize}\PY{l+s}{\PYZdq{}}\PY{p}{,} 
+      \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZhy{}f}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{tex}\PY{l+s}{\PYZdq{}}\PY{p}{,} 
+      \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZhy{}P}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{verboptions=\PYZob{}\PYZcb{},\PYZob{}\PYZcb{},\PYZob{}\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+        \PY{l+s}{\PYZdq{}}\PY{l+s}{numbers=left}\PY{l+s}{\PYZdq{}}\PY{p}{,} 
+        \PY{l+s}{\PYZdq{}}\PY{l+s}{numbersep=0.5em}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s}{\PYZdq{}}\PY{l+s}{firstnumber=\PYZob{}\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+      \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZhy{}o}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{snipdir}\PY{p}{,} \PY{n}{sname} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{.tex}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{,}
+      \PY{n}{inname}
+      \PY{p}{]}\PY{p}{)}
+\PY{c}{\PYZsh{}\PYZdl{}      }
+    \PY{n}{call}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{rm}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{inname}\PY{p}{]}\PY{p}{)}
+    
+    \PY{c}{\PYZsh{}for l in lines:}
+      \PY{c}{\PYZsh{}print \PYZdq{}   \PYZdq{}, i, l.strip()}
+      \PY{c}{\PYZsh{}i += 1}
+      
+\PY{k}{def} \PY{n+nf}{make\PYZus{}color\PYZus{}info}\PY{p}{(} \PY{n}{outdir}\PY{p}{,} \PY{n}{style} \PY{p}{)}\PY{p}{:}
+  \PY{n}{outfile} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{outdir}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{color\PYZus{}info.tex}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+  \PY{n}{o} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(} \PY{n}{outfile}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{w}\PY{l+s}{\PYZdq{}} \PY{p}{)}
+  \PY{n}{call}\PY{p}{(} \PY{p}{[}
+    \PY{l+s}{\PYZdq{}}\PY{l+s}{pygmentize}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+    \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZhy{}S}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{style}\PY{p}{,}
+    \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZhy{}f}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{latex}\PY{l+s}{\PYZdq{}}
+    \PY{p}{]}\PY{p}{,} \PY{n}{stdout} \PY{o}{=} \PY{n}{o} \PY{p}{)}
+  
+\PY{c}{\PYZsh{} borrowing from stackoverflow.}
+\PY{c}{\PYZsh{} http://stackoverflow.com/questions/}
+\PY{c}{\PYZsh{}   600268/mkdir\PYZhy{}p\PYZhy{}functionality\PYZhy{}in\PYZhy{}python}
+\PY{k}{def} \PY{n+nf}{mkdir\PYZus{}p}\PY{p}{(}\PY{n}{path}\PY{p}{)}\PY{p}{:}
+  \PY{k}{try}\PY{p}{:}
+    \PY{n}{os}\PY{o}{.}\PY{n}{makedirs}\PY{p}{(}\PY{n}{path}\PY{p}{)}
+  \PY{k}{except} \PY{n+ne}{OSError} \PY{k}{as} \PY{n}{exc}\PY{p}{:} \PY{c}{\PYZsh{} Python \PYZgt{}2.5}
+    \PY{k}{if} \PY{p}{(} \PY{n}{exc}\PY{o}{.}\PY{n}{errno} \PY{o}{==} \PY{n}{errno}\PY{o}{.}\PY{n}{EEXIST} \PY{o+ow}{and} 
+        \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{isdir}\PY{p}{(}\PY{n}{path}\PY{p}{)} \PY{p}{)}\PY{p}{:}
+      \PY{k}{pass}
+    \PY{k}{else}\PY{p}{:} \PY{k}{raise}
+    
+\PY{k}{if} \PY{n}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s}{\PYZdq{}}\PY{p}{:}
+  \PY{n}{main}\PY{p}{(}\PY{p}{)}
+  \PY{n}{main}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{../tex/}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{full}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{,} \PY{n}{delete}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}
+  \PY{n}{main}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{../tex/pieces/}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{full}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{,} \PY{n}{delete}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}
+\end{Verbatim}

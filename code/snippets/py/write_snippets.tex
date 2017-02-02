@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,numbersep=0.5em,firstnumber=137]
+  \PY{k}{for} \PY{n}{sname} \PY{o+ow}{in} \PY{n}{snippets}\PY{p}{:}
+    \PY{n}{i}\PY{p}{,} \PY{n}{lines} \PY{o}{=} \PY{n}{snippets}\PY{p}{[}\PY{n}{sname}\PY{p}{]}
+    \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{ }\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{sname}\PY{p}{,} \PY{n}{i}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{n+nb}{len}\PY{p}{(}\PY{n}{lines}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+    
+    \PY{n}{fname} \PY{o}{=} \PY{n}{sname} \PY{o}{+} \PY{n}{ext}
+    \PY{n}{inname} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{outdir}\PY{p}{,} \PY{n}{fname}\PY{p}{)}
+    
+    \PY{c}{\PYZsh{} put snippet in outdir subfolder }
+    \PY{c}{\PYZsh{} labeled by extension    }
+    \PY{n}{snipdir} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{outdir}\PY{p}{,}\PY{n}{ext}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+    \PY{n}{mkdir\PYZus{}p}\PY{p}{(}\PY{n}{snipdir}\PY{p}{)}
+    \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{inname}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{w}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{fout}\PY{p}{:}
+      \PY{n}{fout}\PY{o}{.}\PY{n}{writelines}\PY{p}{(}\PY{n}{lines}\PY{p}{)}
+\end{Verbatim}
